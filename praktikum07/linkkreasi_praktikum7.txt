@@ -1,0 +1,10 @@
+link kreasi praktikum 7
+
+link class Mahasiswa
+https://kreasi.nurulfikri.ac.id/tsab21231si/web2/blog/index.php/mahasiswa/index
+
+link class Dosen
+https://kreasi.nurulfikri.ac.id/tsab21231si/web2/blog/index.php/dosen/index
+
+link class Matakuliah
+https://kreasi.nurulfikri.ac.id/tsab21231si/web2/blog/index.php/matakuliah/index
