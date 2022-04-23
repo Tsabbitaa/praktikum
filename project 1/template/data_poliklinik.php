@@ -16,15 +16,72 @@
 <div class="container">
 <h1>Data BMI Pasien</h1>
 <?php
-require_once 'class_BMIPasien.php';
-require_once 'class_pasien.php';
-require_once 'class_BMI.php';
+class Pasien{
+    public $id;
+    public $kode;
+    public $nama;
+    public $tmp_lahir;
+    public $tgl_lahir;
+    public $email;
+    public $gender;
 
-$id = $_POST["kode"];
-$namaPasien = $_POST["nama"];
-$gender = $_POST["gender"];
+    function __construct($kode, $nama, $gender){
+        $this -> kode = $kode;
+        $this -> nama = $nama;
+        $this -> gender = $gender;
+    }
+}
+
+class Bmi{
+    public $berat;
+    public $tinggi;
+    public $bmi;
+
+    function __construct($berat, $tinggi){
+        $this->berat = $berat;
+        $this->tinggi = $tinggi;
+
+    }
+
+    public function nilaiBMI(){
+        $nilaiBMI = $this->berat / pow($this->tinggi,2);
+        $this->bmi = $nilaiBMI;
+        return $nilaiBMI;
+    }
+
+    public function statusBMI(){
+        if ($this->bmi >=30.0){
+            return 'Kegemukan (Obesitas)';
+        }elseif ($this->bmi >=25.0 && $this->bmi <=29.9) {
+            return 'Kelebihan berat badan';
+        }elseif ($this->bmi >=24.9 && $this->bmi <=18.5) {
+            return 'normal (ideal)';
+        }else{
+            return 'Kekurangan berat badan';
+        }
+    }
+}
+
+class BMIPasien{
+    public $id;
+    public $bmi;
+    public $tanggal;
+    public $pasien;
+
+    function __construct($tanggal){
+        $this->tanggal = $tanggal;
+    }
+}
+
+$_id = $_POST["kode"];
+$_namaPasien = $_POST["nama"];
+$_gender = $_POST["gender"];
 $_berat = $_POST['berat'];
 $_tinggi = $_POST['tinggi'];
+
+$psn1 = new Bmi("$_berat", "$_tinggi");
+
+
 ?>
 <table class="table table-bordered">
     <thead>
@@ -82,8 +139,8 @@ $_tinggi = $_POST['tinggi'];
             <td><?php echo $_POST["gender"];?></td>
             <td><?php echo $_POST["berat"];?></td>
             <td><?php echo $_POST["tinggi"];?></td>
-            <td></td>
-            <td></td>
+            <td><?=$psn1->nilaiBMI()?></td>
+            <td><?=$psn1->statusBMI()?></td>
         </tr>
     </tbody>
  </table> 
